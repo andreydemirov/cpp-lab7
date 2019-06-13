@@ -1,12 +1,65 @@
-﻿// cpp-lab7.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+// cpp-lab7.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+
+/* Дано число N (> 0) и набор из N чисел. Создать стек, содержащий исход-
+ные числа (последнее число будет вершиной стека), и вывести указатель
+на его вершину.*/
 
 #include "pch.h"
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+using namespace std;
+
+struct numb {
+	int data;
+	numb *next;
+};
+
+numb *top = NULL;
+
+void push(numb *n);
+void pop();
+int vvod_i();
+
+int main() {
+
+	setlocale(LC_ALL, "Rus");
+	int N, i;
+
+	cout << "Введите N: " << endl;
+	N = vvod_i();
+	for (i = 0; i < N; i++) {
+		numb *n = new numb;
+		cout << "Введите число: " << endl;
+		n->data = vvod_i();
+		push(n);
+	}
+	cout << top << ":" << top->data << endl;
+	return 0;
+}
+
+void pop() {
+	numb *n = top;
+	top = top->next;
+	delete(n);
+}
+
+void push(numb *n) {
+	n->next = top;
+	top = n;
+}
+
+int vvod_i() {
+	int x;
+	if (cin >> x) {
+		cin.clear();
+		cin.sync();
+		return x;
+	}
+	else {
+		cin.clear();
+		cin.sync();
+		cout << "Число введено не коректно, попробуйте ещё раз" << endl;
+	}
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
